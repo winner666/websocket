@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Socket2</title>
+    <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="socket.min.js"></script>
+
+    <script type="text/javascript">
+        var userId;
+        //服务器发送消息
+        function AdminSend(){
+            $.ajax({
+                type: "post",
+                url: 'http://192.168.0.132:8070/other/sendSocketMSG',
+                data: JSON.stringify({
+                    'userId':$('#userId').val(),
+                    'msg':$('#text').val()
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                }
+            });
+        }
+
+        //服务器发送消息
+        function removeAdmin(){
+            $.ajax({
+                type: "post",
+                url: 'http://192.168.0.132:8070/other/removeSocket',
+                data: JSON.stringify({
+                    'userId':$('#userId').val()
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                }
+            });
+        }
+
+        //userID控制 登录
+        function idPlus(){
+            userId = $('#userId').val();
+           // socketReady(userId);
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <p id="message"></p>
+    <input type="text" placeholder="userId" id="userId"/>
+    <input type="text" placeholder="text" id="text"/>
+    <button onclick="idPlus()"> 登录socket</button>
+    <button onclick="send()"> 发送新消息</button>
+    <button onclick="AdminSend()">发送系统消息</button>
+    <button onclick="removeAdmin()">强制下线</button>
+</body>
+<script type="text/javascript" src="./js/MySocketJS.js"></script>
+</html>
